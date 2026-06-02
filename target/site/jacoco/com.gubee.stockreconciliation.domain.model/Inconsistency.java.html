@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Inconsistency.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gubee-stock-reconciliation</a> &gt; <a href="index.source.html" class="el_package">com.gubee.stockreconciliation.domain.model</a> &gt; <span class="el_source">Inconsistency.java</span></div><h1>Inconsistency.java</h1><pre class="source lang-java linenums">package com.gubee.stockreconciliation.domain.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
+@Table(name = &quot;inconsistencies&quot;)
+<span class="pc" id="L10">@Getter @Setter @NoArgsConstructor</span>
+public class Inconsistency {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+<span class="nc" id="L15">    private UUID id;</span>
+
+    @Column(name = &quot;event_id&quot;, nullable = false)
+<span class="nc" id="L18">    private String eventId;</span>
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = &quot;event_type&quot;, nullable = false)
+<span class="nc" id="L22">    private EventType eventType;</span>
+
+    @Column(name = &quot;account_id&quot;, nullable = false)
+<span class="nc" id="L25">    private String accountId;</span>
+
+    @Column(name = &quot;sku&quot;, nullable = false)
+<span class="nc" id="L28">    private String sku;</span>
+
+    @Column(name = &quot;marketplace&quot;)
+<span class="nc" id="L31">    private String marketplace;</span>
+
+    @Column(name = &quot;external_order_id&quot;)
+<span class="nc" id="L34">    private String externalOrderId;</span>
+
+    @Column(name = &quot;description&quot;, nullable = false, length = 1000)
+<span class="nc" id="L37">    private String description;</span>
+
+    @Column(name = &quot;occurred_at&quot;, nullable = false)
+<span class="nc" id="L40">    private LocalDateTime occurredAt;</span>
+
+    @Column(name = &quot;detected_at&quot;, nullable = false)
+<span class="nc" id="L43">    private LocalDateTime detectedAt;</span>
+
+    public static Inconsistency of(String eventId, EventType type, String accountId, String sku,
+                                    String marketplace, String externalOrderId,
+                                    String description, LocalDateTime occurredAt) {
+<span class="fc" id="L48">        Inconsistency i = new Inconsistency();</span>
+<span class="fc" id="L49">        i.eventId = eventId;</span>
+<span class="fc" id="L50">        i.eventType = type;</span>
+<span class="fc" id="L51">        i.accountId = accountId;</span>
+<span class="fc" id="L52">        i.sku = sku;</span>
+<span class="fc" id="L53">        i.marketplace = marketplace;</span>
+<span class="fc" id="L54">        i.externalOrderId = externalOrderId;</span>
+<span class="fc" id="L55">        i.description = description;</span>
+<span class="fc" id="L56">        i.occurredAt = occurredAt;</span>
+<span class="fc" id="L57">        i.detectedAt = LocalDateTime.now();</span>
+<span class="fc" id="L58">        return i;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

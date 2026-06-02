@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EventQueryService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gubee-stock-reconciliation</a> &gt; <a href="index.source.html" class="el_package">com.gubee.stockreconciliation.application.service</a> &gt; <span class="el_source">EventQueryService.java</span></div><h1>EventQueryService.java</h1><pre class="source lang-java linenums">package com.gubee.stockreconciliation.application.service;
+
+import com.gubee.stockreconciliation.application.port.in.QueryEventsUseCase;
+import com.gubee.stockreconciliation.application.port.out.InconsistencyRepositoryPort;
+import com.gubee.stockreconciliation.application.port.out.StockEventRepositoryPort;
+import com.gubee.stockreconciliation.domain.model.EventStatus;
+import com.gubee.stockreconciliation.infrastructure.adapter.in.web.dto.InconsistencyResponse;
+import com.gubee.stockreconciliation.infrastructure.adapter.in.web.dto.StockEventResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+<span class="fc" id="L16">@RequiredArgsConstructor</span>
+@Transactional(readOnly = true)
+public class EventQueryService implements QueryEventsUseCase {
+
+    private final StockEventRepositoryPort stockEventRepo;
+    private final InconsistencyRepositoryPort inconsistencyRepo;
+
+    @Override
+    public List&lt;StockEventResponse&gt; getEventsByStatus(EventStatus status) {
+<span class="fc" id="L25">        return stockEventRepo.findByStatus(status).stream()</span>
+<span class="fc" id="L26">            .map(e -&gt; new StockEventResponse(</span>
+<span class="fc" id="L27">                e.getEventId(), e.getType(), e.getStatus(), e.getStatusReason(),</span>
+<span class="fc" id="L28">                e.getAccountId(), e.getSku(), e.getMarketplace(), e.getExternalOrderId(),</span>
+<span class="fc" id="L29">                e.getOccurredAt(), e.getProcessedAt()))</span>
+<span class="fc" id="L30">            .toList();</span>
+    }
+
+    @Override
+    public List&lt;InconsistencyResponse&gt; getInconsistencies() {
+<span class="nc" id="L35">        return inconsistencyRepo.findAll().stream()</span>
+<span class="nc" id="L36">            .map(i -&gt; new InconsistencyResponse(</span>
+<span class="nc" id="L37">                i.getId(), i.getEventId(), i.getEventType(),</span>
+<span class="nc" id="L38">                i.getAccountId(), i.getSku(), i.getMarketplace(), i.getExternalOrderId(),</span>
+<span class="nc" id="L39">                i.getDescription(), i.getOccurredAt(), i.getDetectedAt()))</span>
+<span class="nc" id="L40">            .toList();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

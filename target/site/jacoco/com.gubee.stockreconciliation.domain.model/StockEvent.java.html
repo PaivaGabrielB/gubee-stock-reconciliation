@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StockEvent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gubee-stock-reconciliation</a> &gt; <a href="index.source.html" class="el_package">com.gubee.stockreconciliation.domain.model</a> &gt; <span class="el_source">StockEvent.java</span></div><h1>StockEvent.java</h1><pre class="source lang-java linenums">package com.gubee.stockreconciliation.domain.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = &quot;stock_events&quot;)
+<span class="fc" id="L9">@Getter @Setter @NoArgsConstructor</span>
+public class StockEvent {
+
+    @Id
+    @Column(name = &quot;event_id&quot;, nullable = false)
+<span class="fc" id="L14">    private String eventId;</span>
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = &quot;type&quot;, nullable = false)
+<span class="fc" id="L18">    private EventType type;</span>
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = &quot;status&quot;, nullable = false)
+<span class="fc" id="L22">    private EventStatus status;</span>
+
+    @Column(name = &quot;status_reason&quot;)
+<span class="fc" id="L25">    private String statusReason;</span>
+
+    @Column(name = &quot;account_id&quot;, nullable = false)
+<span class="fc" id="L28">    private String accountId;</span>
+
+    @Column(name = &quot;sku&quot;, nullable = false)
+<span class="fc" id="L31">    private String sku;</span>
+
+    @Column(name = &quot;marketplace&quot;)
+<span class="fc" id="L34">    private String marketplace;</span>
+
+    @Column(name = &quot;external_order_id&quot;)
+<span class="fc" id="L37">    private String externalOrderId;</span>
+
+    @Column(name = &quot;quantity&quot;)
+<span class="fc" id="L40">    private Integer quantity;</span>
+
+    @Column(name = &quot;available&quot;)
+<span class="fc" id="L43">    private Integer available;</span>
+
+    @Column(name = &quot;quantity_sent&quot;)
+<span class="fc" id="L46">    private Integer quantitySent;</span>
+
+    @Column(name = &quot;reason&quot;)
+<span class="fc" id="L49">    private String reason;</span>
+
+    @Column(name = &quot;occurred_at&quot;, nullable = false)
+<span class="fc" id="L52">    private LocalDateTime occurredAt;</span>
+
+    @Column(name = &quot;processed_at&quot;)
+<span class="fc" id="L55">    private LocalDateTime processedAt;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

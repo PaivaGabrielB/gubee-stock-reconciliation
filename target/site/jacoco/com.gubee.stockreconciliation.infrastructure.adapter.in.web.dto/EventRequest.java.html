@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EventRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gubee-stock-reconciliation</a> &gt; <a href="index.source.html" class="el_package">com.gubee.stockreconciliation.infrastructure.adapter.in.web.dto</a> &gt; <span class="el_source">EventRequest.java</span></div><h1>EventRequest.java</h1><pre class="source lang-java linenums">package com.gubee.stockreconciliation.infrastructure.adapter.in.web.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.gubee.stockreconciliation.domain.model.EventType;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+
+<span class="pc bnc" id="L12" title="All 94 branches missed.">@Data</span>
+@Schema(description = &quot;Incoming stock/order event&quot;)
+public class EventRequest {
+
+    @NotBlank
+    @Schema(example = &quot;evt-001&quot;)
+<span class="fc" id="L18">    private String eventId;</span>
+
+    @NotNull
+    @Schema(example = &quot;ORDER_CREATED&quot;)
+<span class="fc" id="L22">    private EventType type;</span>
+
+    @NotNull
+    @JsonFormat(pattern = &quot;yyyy-MM-dd'T'HH:mm:ss'Z'&quot;)
+    @Schema(example = &quot;2026-05-28T10:00:00Z&quot;)
+<span class="fc" id="L27">    private LocalDateTime occurredAt;</span>
+
+    @Schema(example = &quot;MERCADO_LIVRE&quot;)
+<span class="fc" id="L30">    private String marketplace;</span>
+
+    @NotBlank
+    @Schema(example = &quot;account-001&quot;)
+<span class="fc" id="L34">    private String accountId;</span>
+
+    @Schema(example = &quot;ML-123456&quot;)
+<span class="fc" id="L37">    private String externalOrderId;</span>
+
+    @NotBlank
+    @Schema(example = &quot;ABC-123&quot;)
+<span class="fc" id="L41">    private String sku;</span>
+
+    @Schema(description = &quot;Used by ORDER_CREATED, ORDER_CANCELLED, MARKETPLACE_STOCK_RESTORED&quot;, example = &quot;2&quot;)
+<span class="fc" id="L44">    private Integer quantity;</span>
+
+    @Schema(description = &quot;Used by STOCK_ADJUSTED — absolute quantity&quot;, example = &quot;10&quot;)
+<span class="fc" id="L47">    private Integer available;</span>
+
+    @Schema(description = &quot;Used by STOCK_ADJUSTED&quot;, example = &quot;manual_adjustment&quot;)
+<span class="fc" id="L50">    private String reason;</span>
+
+    @Schema(description = &quot;Used by STOCK_SYNC_SENT&quot;, example = &quot;8&quot;)
+<span class="fc" id="L53">    private Integer quantitySent;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
