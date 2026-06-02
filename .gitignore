@@ -4,3 +4,12 @@
 *.iws
 *.ipr
 out/
+
+# Maven Target
+target/
+
+# Logs e arquivos temporários de ambiente
+*.log
+hs_err_pid*.log
+.mvn/
+.attach_pid*
